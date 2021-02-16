@@ -35,9 +35,9 @@ function paint(){
     ctx.fill();
     ctx.stroke(); 
   }
-  // setInterval(function() {
-  //   flashtext(rectList[0], "silver");
-  // }, 500);
+  window.interval = setInterval(function() {
+    flashtext(rectList[0], "silver");
+  }, 500);
   createPattern();
 }
 
@@ -45,8 +45,6 @@ function createPattern(){
   tile = Math.floor((Math.random() * 4)); //https://www.w3schools.com/jsref/jsref_random.asp
   pattern.push(tile);
 }
-
-var myVar = setInterval(lightUp, 300);
 
 function lightUp(){
   for(var i = 0; i < pattern.length; i++){
@@ -60,6 +58,7 @@ function lightUp(){
 }
 
 var x;
+
 function flashtext(ele, col) {
   var rect = rectList[0];
   var tmpColCheck = rectList[0].color;
@@ -79,6 +78,7 @@ function flashtext(ele, col) {
     ctx.fill();
     ctx.stroke();
     x = 0;
+    clearInterval(interval);
   }
 }
 
