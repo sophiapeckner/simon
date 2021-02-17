@@ -35,50 +35,65 @@ function paint(){
     ctx.fill();
     ctx.stroke(); 
   }
-  window.interval = setInterval(function() {
-    flashtext(rectList[0], "silver");
-  }, 500);
-  createPattern();
+  // createPattern();
+  pattern = [0,0];
+  selectSquares()
 }
 
 function createPattern(){
-  tile = Math.floor((Math.random() * 4)); //https://www.w3schools.com/jsref/jsref_random.asp
+  //https://www.w3schools.com/jsref/jsref_random.asp
+  tile = Math.floor((Math.random() * 4)); 
   pattern.push(tile);
 }
 
-function lightUp(){
-  for(var i = 0; i < pattern.length; i++){
-    var tile1 = pattern[i];
-    ctx.beginPath();
-    ctx.rect(rect.x, rect.y, rect.width, rect.height);
-    ctx.fillStyle = rect.color;
-    ctx.fill();
-    ctx.stroke(); 
+// function lightUp(){
+//   for(var i = 0; i < pattern.length; i++){
+//     var tile1 = pattern[i];
+//     ctx.beginPath();
+//     ctx.rect(rect.x, rect.y, rect.width, rect.height);
+//     ctx.fillStyle = rect.color;
+//     ctx.fill();
+//     ctx.stroke(); 
+//   }
+// }
+
+var counter = -1;
+
+function selectSquares(){
+  counter++;
+  if(counter < pattern.length){
+    window.interval = setInterval(function() {
+      flashtext(rectList[counter]);
+    }, 300);
+  } else {
+    console.log(counter)
+    counter = 0;
   }
 }
 
 var x;
 
-function flashtext(ele, col) {
-  var rect = rectList[0];
-  var tmpColCheck = rectList[0].color;
-  if (tmpColCheck === "red" && x!= 1) {
+function flashtext(ele) {
+  var rect = ele;
+  var tmpColCheck = rect.color;
+  if (tmpColCheck === rect.color && x!= 1) {
     // rectList[0].color = col;
     x = 1;
     ctx.beginPath();
     ctx.rect(rect.x, rect.y, rect.width, rect.height);
-    ctx.fillStyle = col;
+    ctx.fillStyle = "grey";
     ctx.fill();
     ctx.stroke();
   } else if (x == 1) {
     // rectList[0].color = "red";
     ctx.beginPath();
     ctx.rect(rect.x, rect.y, rect.width, rect.height);
-    ctx.fillStyle = "red";
+    ctx.fillStyle = ele.color;
     ctx.fill();
     ctx.stroke();
     x = 0;
     clearInterval(interval);
+    selectSquares()
   }
 }
 
