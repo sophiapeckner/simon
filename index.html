@@ -3,13 +3,26 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>repl.it</title>
+    <title>Simon Game</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <canvas id="myCanvas" width="400" height="400" style="border: 1px solid #d3d3d3;">
+    <main class="container">
+      <section id="game">
+        <h1 id="title">Play Simon!</h1>
+        <p id="instructions">Click on the tile(s) that flash color. If you miss a tile in the pattern you lose. Press <i> START </i> to play</p>
+        <button id="start_btn" onclick="main()">START</button>
+        <canvas id="myCanvas" width="400" height="400" style="border: 1px solid #d3d3d3;" onclick="getCoords(canvas, event)">
           Your browser does not support the HTML5 canvas tag.
-    </canvas>
+        </canvas>
+        <p id="game_over"></p>
+      </section>
+      
+      <!-- <selection id="instructions">
+        <h1>Instructions</h1>
+        <p>Click on the tile(s) that flash color. If you miss a tile in the pattern you lose. Press <strong> START </strong> to play</p>
+      </selection> -->
+    </main>
     <script src="script.js"></script>
   </body>
 </html>
