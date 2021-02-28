@@ -14,6 +14,14 @@ var counter = -1;
 var timesClicked = 0;
 var x;
 
+function main(){
+  grid();
+  paint();
+  createPattern();
+  selectSquares();
+  document.getElementById("start_btn").disabled = true;
+}
+
 // Creates the grid of 4 squares and stores in an array
 function grid(){
   for(i = 0; i < 2; i++){
@@ -30,7 +38,6 @@ function grid(){
       rectList.push(rect);
     } 
   }
-  paint();
 }
 
 // Makes the 4 squares in rectList visible on Canvas
@@ -43,7 +50,6 @@ function paint(){
     context.fill();
     context.stroke(); 
   }
-  createPattern();
 }
 
 // Adds a random num. (0-4) to pattern[] so that there's
@@ -51,7 +57,6 @@ function paint(){
 function createPattern(){
   tile = Math.floor((Math.random() * 4)); 
   pattern.push(tile);
-  selectSquares();
 }
 
 // Calls flashTile() once every 300 milliseconds
@@ -112,11 +117,13 @@ function checkTile(index){
     if(timesClicked == pattern.length){
       timesClicked = 0;
       createPattern();
+      selectSquares();
     }
   } else {
     console.log("incorrect");
-    document.getElementById("game-over").innerHTML = "Game Over!";
+    document.getElementById("game_over").innerHTML = "Game Over!";
   }
 }
 
-grid();
+// grid();
+// paint();
